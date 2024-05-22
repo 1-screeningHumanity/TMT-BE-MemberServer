@@ -26,6 +26,8 @@ public enum BaseResponseCode {
 
     //Test
     TEST_ERROR(HttpStatus.BAD_REQUEST, false, 1234, "Test용 Error Message 입니다"),
+    //SignUp
+    SIGNUP_FAILED(HttpStatus.BAD_REQUEST, false, 2000, "존재하지 않는 닉네임"),
     //
 
     //공통 에러. 9000 ~ 9999

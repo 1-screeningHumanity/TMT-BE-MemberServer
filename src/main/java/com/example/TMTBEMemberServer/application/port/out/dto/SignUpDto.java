@@ -1,20 +1,15 @@
 package com.example.TMTBEMemberServer.application.port.out.dto;
 
-
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 @Getter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-@Setter
 public class SignUpDto {
 
     private Long userId;
@@ -27,4 +22,13 @@ public class SignUpDto {
     @Pattern(regexp = "^[가-힣a-zA-Z0-9]{1,10}$", message = "닉네임은 한글, 영어, 숫자로 구성되며 1자에서 10자리로 입력해주세요.")
     private String nickName;
 
+    @Builder
+    public SignUpDto(Long userId, String name, String password, String phoneNumber,
+            String nickName) {
+        this.userId = userId;
+        this.name = name;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.nickName = nickName;
+    }
 }

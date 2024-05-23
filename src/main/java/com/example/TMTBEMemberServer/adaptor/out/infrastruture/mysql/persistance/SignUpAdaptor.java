@@ -22,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class SignUpAdaptor implements SaveSignUpPort {
 
     private final SignUpJpaRepository signUpJpaRepository;
-    private final ModelMapper modelMapper;
 
     public String hashPassword(String Password) { //PW 해시 암호화
         Password = new BCryptPasswordEncoder().encode(Password);
@@ -45,20 +44,22 @@ public class SignUpAdaptor implements SaveSignUpPort {
     }
 
     private String randomNickname() { //랜덤 닉네임 생성 메소드
+
         String adjective = ADJECTIVES[random.nextInt(ADJECTIVES.length)]; //형용사 조합
         String noun = NOUNS[random.nextInt(NOUNS.length)]; //명사조합
         return adjective + noun;
     }
 
     @Transactional
-    public SignUpDto signUp(SignUpDto signUpDto){
+    @Override
+    public void signUp(SignUpDto signUpDto){
 
         UUID uuid =UUID.randomUUID(); //uuid 생성
         String uuidString = uuid.toString();
 
         if(signUpJpaRepository.existsByNickname(signUpDto.getNickName())){ //닉네임 중복검사
             throw new CustomException(BaseResponseCode.SIGNUP_FAILED);
-        }else {MemberEntity member = MemberEntity.builder()
+        }MemberEntity member = MemberEntity.builder()
                 .name(signUpDto.getName())
                 .phoneNumber(signUpDto.getPhoneNumber())
                 .nickname(signUpDto.getNickName())
@@ -67,7 +68,5 @@ public class SignUpAdaptor implements SaveSignUpPort {
                 .uuid(uuidString)
                 .build();
             signUpJpaRepository.save(member);
-        }
-        return null;
     }
 }

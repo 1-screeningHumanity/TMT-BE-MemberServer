@@ -12,7 +12,6 @@ public class SignUp {
     private String name;
     private String password;
     private String phoneNumber;
-    private String payingPassword;
     private String nickName;
 
 }

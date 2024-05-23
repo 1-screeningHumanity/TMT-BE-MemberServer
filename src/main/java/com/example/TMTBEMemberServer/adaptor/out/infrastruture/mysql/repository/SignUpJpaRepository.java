@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SignUpJpaRepository extends JpaRepository<MemberEntity, Long> {
     MemberEntity findByNickname(String nickname);
-
     boolean existsByNickname(String nickname); //닉네임 중복체크
 
 

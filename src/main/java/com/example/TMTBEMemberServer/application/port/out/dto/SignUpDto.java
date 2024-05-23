@@ -1,5 +1,6 @@
 package com.example.TMTBEMemberServer.application.port.out.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
@@ -8,10 +9,10 @@ import lombok.NoArgsConstructor;
 
 
 @Getter
-@Builder
 @NoArgsConstructor
 public class SignUpDto {
 
+    @Column(nullable = false)
     private Long userId;
     private String name;
     @NotEmpty(message = "비밀번호를 입력해주세요.")

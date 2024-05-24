@@ -1,5 +1,4 @@
 package com.example.TMTBEMemberServer.global.common.response;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.http.HttpStatus;
 

@@ -20,7 +20,6 @@ public class SwaggerConfig {
     private static final String BEARER_TOKEN = "Bearer ";
     private static final String BEARER_SCHEME = "bearer";
     private static final String BEARER_FORMAT = "JWT";
-
     private int serverPort;
 
     @EventListener
@@ -61,8 +60,8 @@ public class SwaggerConfig {
         localServer.setDescription("Local Test Server URL");
 
         Server dynamicServer = new Server();
-        dynamicServer.setUrl("https://{domain}");
-        dynamicServer.setDescription("Server URL");
+        dynamicServer.setUrl("https://screeninghumanity.shop/api/v1/member");
+        dynamicServer.setDescription("");
 
         servers.add(localServer);
         servers.add(dynamicServer);

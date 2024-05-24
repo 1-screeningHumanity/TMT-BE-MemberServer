@@ -36,7 +36,7 @@ public class MemberEntity extends BaseEntity {
 
     private String uuid; //uuid
 
-    private String status; //회원상태
+    private int status; //회원상태
 
     private String phoneNumber; //전화번호
 

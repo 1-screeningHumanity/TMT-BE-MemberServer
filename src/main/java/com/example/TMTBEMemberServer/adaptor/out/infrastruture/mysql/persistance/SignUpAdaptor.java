@@ -6,6 +6,7 @@ import com.example.TMTBEMemberServer.application.port.out.dto.SignUpDto;
 import com.example.TMTBEMemberServer.application.port.out.outport.SaveSignUpPort;
 import com.example.TMTBEMemberServer.global.common.exception.CustomException;
 import com.example.TMTBEMemberServer.global.common.response.BaseResponseCode;
+import com.example.TMTBEMemberServer.global.common.response.State;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,7 +36,7 @@ public class SignUpAdaptor implements SaveSignUpPort {
                 .name(signUpDto.getName())
                 .phoneNumber(signUpDto.getPhoneNumber())
                 .nickname(signUpDto.getNickName())
-                .status("1")
+                .status(State.SIGNIN.ordinal())
                 .password(hashPassword(signUpDto.getPassword()))
                 .uuid(uuidString)
                 .build();

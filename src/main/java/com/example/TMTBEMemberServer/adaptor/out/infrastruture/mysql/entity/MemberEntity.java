@@ -1,6 +1,7 @@
 package com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity;
 
 import com.example.TMTBEMemberServer.domain.SignUp;
+import com.example.TMTBEMemberServer.global.common.response.State;
 import com.example.TMTBEMemberServer.global.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,7 +37,7 @@ public class MemberEntity extends BaseEntity {
 
     private String uuid; //uuid
 
-    private String status; //회원상태
+    private int status; //회원상태
 
     private String phoneNumber; //전화번호
 
@@ -46,7 +47,6 @@ public class MemberEntity extends BaseEntity {
                 .name(signUp.getName())
                 .password(signUp.getPassword())
                 .phoneNumber(signUp.getPhoneNumber())
-                .payingPassword(signUp.getPayingPassword())
                 .nickname(signUp.getNickName())
                 .build();
     }

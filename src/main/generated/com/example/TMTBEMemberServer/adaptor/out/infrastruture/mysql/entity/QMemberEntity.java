@@ -39,7 +39,7 @@ public class QMemberEntity extends EntityPathBase<MemberEntity> {
 
     public final StringPath phoneNumber = createString("phoneNumber");
 
-    public final StringPath status = createString("status");
+    public final NumberPath<Integer> status = createNumber("status", Integer.class);
 
     public final StringPath uuid = createString("uuid");
 

@@ -18,7 +18,6 @@ spring:
       hibernate:
         format_sql: true
 
-
 server:
   port: 8080
 
@@ -44,8 +43,6 @@ springdoc:
       enabled: true
   cache:
     disabled: true
-
-
 
 #Token
 JWT:

@@ -36,7 +36,7 @@ public class SignUpAdaptor implements SaveSignUpPort {
                 .name(signUpDto.getName())
                 .phoneNumber(signUpDto.getPhoneNumber())
                 .nickname(signUpDto.getNickName())
-                .status(State.SIGNIN.ordinal())
+                .status(State.SIGNUP.getCode())
                 .password(hashPassword(signUpDto.getPassword()))
                 .uuid(uuidString)
                 .build();

@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Getter
@@ -32,12 +33,13 @@ public class MemberEntity extends BaseEntity {
 
     private String nickname; //닉네임
 
-    @Column(length = 4)
     private String payingPassword; //결제 PW
 
     private String uuid; //uuid
 
     private int status; //회원상태
+
+    private int grade; //회원등급
 
     private String phoneNumber; //전화번호
 
@@ -50,5 +52,6 @@ public class MemberEntity extends BaseEntity {
                 .nickname(signUp.getNickName())
                 .build();
     }
+
 
 }

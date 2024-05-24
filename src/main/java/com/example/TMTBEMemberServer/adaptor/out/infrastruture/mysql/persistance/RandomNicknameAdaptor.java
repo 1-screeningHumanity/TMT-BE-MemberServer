@@ -17,8 +17,7 @@ public class RandomNicknameAdaptor implements LoadRandomNicknamePort {
     public Boolean loadRandomNickname(RandomNicknameDto randomNicknameDto) {
         if (signUpJpaRepository.existsByNickname(randomNicknameDto.getNickname())) {
             return true;
-        }
-        return false;
+        }return false;
     }
 
 }

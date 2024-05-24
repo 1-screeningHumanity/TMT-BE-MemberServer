@@ -39,7 +39,7 @@ public class RandomNicknameService implements RandomNicknameUsecase {
         //랜덤 닉네임 생성 완료 하고 dto 로 변환.
         Boolean tossnickname = loadRandomNicknamePort.loadRandomNickname(randomNicknameDto);
 
-        if (tossnickname == true){
+        if (tossnickname){
             randomnicknameFalse(true);
         }
         return randomNicknameDto;
@@ -47,7 +47,7 @@ public class RandomNicknameService implements RandomNicknameUsecase {
 
     public void randomnicknameFalse(Boolean result){
 
-        if(result == true){
+        if(result){
             createRamdomNickName();
         }
 

@@ -1,4 +1,5 @@
-package com.example.TMTBEMemberServer.adaptor.in.web.vo;
+package com.example.TMTBEMemberServer.domain;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +10,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaypasswordChangeRequestVo {
+public class PayPasswordChange {
 
+    private String uuid;
     private String payingPassword;
 
 }

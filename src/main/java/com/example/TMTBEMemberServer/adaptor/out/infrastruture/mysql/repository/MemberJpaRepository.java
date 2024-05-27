@@ -13,6 +13,4 @@ public interface MemberJpaRepository extends JpaRepository<MemberEntity, Long> {
     MemberEntity findByNameAndPhoneNumber(String name, String phoneNumber);
 
     Optional<MemberEntity> findByUuid(String uuid);
-
-
 }

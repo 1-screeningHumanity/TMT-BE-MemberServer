@@ -6,6 +6,7 @@ import com.example.TMTBEMemberServer.adaptor.in.web.vo.PaypasswordChangeRequestV
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.SignInRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.SignUpRequestVo;
 import com.example.TMTBEMemberServer.application.port.in.usecase.NickNameChangeUsecase;
+import com.example.TMTBEMemberServer.application.port.in.usecase.PayPasswordChangeUsecase;
 import com.example.TMTBEMemberServer.application.port.out.dto.SignInResponseDto;
 import com.example.TMTBEMemberServer.application.port.in.usecase.PayPasswordUsecase;
 import com.example.TMTBEMemberServer.application.port.in.usecase.RandomNicknameUsecase;
@@ -19,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -39,6 +41,7 @@ public class MemberController {
     private final SignInUsecase signInUsecase;
     private final DecodingToken decodingToken;
     private final NickNameChangeUsecase nickNameChangeUsecase;
+    private final PayPasswordChangeUsecase payPasswordChangeUsecase;
 
     @PostMapping("/signup") //회원가입
     public BaseResponse<Void> SignUp(@RequestBody SignUpRequestVo signUpRequestVo) {
@@ -88,14 +91,15 @@ public class MemberController {
         return new BaseResponse<>();
     }
 
-    @PostMapping("/pay-password")
+    @PatchMapping("/pay-password")
     public BaseResponse<Void> payPasswordChange(@RequestHeader ("Authorization") String jwt,
             @RequestBody PaypasswordChangeRequestVo paypasswordChangeRequestVo) {
 
         String uuid = decodingToken.getUuid(jwt);
+        payPasswordChangeUsecase.changePaypassword(modelMapper.map(paypasswordChangeRequestVo,
+                PayPasswordChangeUsecase.PaypasswordChangeRequestDto.class),uuid);
 
         return new BaseResponse<>();
-
     }
 
 }

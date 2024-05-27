@@ -7,4 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface LoadSignInPort {
     Optional<MemberEntity> signIn(SignIn signIn);
+    void changeStatusLogIn(Long memberId);
 }

@@ -2,6 +2,7 @@ package com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.persistanc
 
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity.MemberEntity;
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.MemberJpaRepository;
+import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.MemberQueryDslRepository;
 import com.example.TMTBEMemberServer.application.port.out.outport.LoadSignInPort;
 import com.example.TMTBEMemberServer.domain.SignIn;
 import com.example.TMTBEMemberServer.global.common.exception.CustomException;
@@ -9,7 +10,6 @@ import com.example.TMTBEMemberServer.global.common.response.BaseResponseCode;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Slf4j
 public class SignInAdaptor implements LoadSignInPort {
-
     private final MemberJpaRepository memberJpaRepository;
-
+    private final MemberQueryDslRepository memberQueryDslRepository;
     @Override
     @Transactional
     public Optional<MemberEntity> signIn(SignIn signIn){
@@ -36,6 +35,13 @@ public class SignInAdaptor implements LoadSignInPort {
             throw new CustomException(BaseResponseCode.WRONG_PASSWORD); //PW 가 다르면 로그인 실패
         }
         return Optional.of(member);
+
+    }
+    @Override
+    @Transactional
+    public void changeStatusLogIn(Long memberId) {
+        memberQueryDslRepository.changeStatusLogin(memberId);
+
     }
 
 }

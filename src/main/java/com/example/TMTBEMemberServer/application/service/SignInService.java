@@ -45,13 +45,17 @@ public class SignInService implements SignInUsecase {
             String accessToken = jwtUtil.createAccessToken(authentication); // 사용자 Access 토큰 생성
             String refreshToken = jwtUtil.createRefreshToken(authentication); // 사용자 Refresh 토큰 생성
 
+            loadSignInPort.changeStatusLogIn(member.getMemberId());
+
             return SignInResponseDto.builder()
                     .name(member.getName())
                     .accessToken(accessToken)
                     .refreshToken(refreshToken)
                     .build();
+
         } else {
             throw new CustomException(BaseResponseCode.SIGNIN_FAILED);
+
         }
     }
 }

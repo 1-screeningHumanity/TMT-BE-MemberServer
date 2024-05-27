@@ -1,12 +1,15 @@
 package com.example.TMTBEMemberServer.adaptor.in.web.controller;
 
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.NicknameChangeRequestVo;
+import com.example.TMTBEMemberServer.adaptor.in.web.vo.PasswordChangeRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PayPasswordRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PaypasswordChangeRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.SignInRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.SignUpRequestVo;
 import com.example.TMTBEMemberServer.application.port.in.usecase.NickNameChangeUsecase;
+import com.example.TMTBEMemberServer.application.port.in.usecase.PasswordChangeUsecase;
 import com.example.TMTBEMemberServer.application.port.in.usecase.PayPasswordChangeUsecase;
+import com.example.TMTBEMemberServer.application.port.in.usecase.SignOutUsecase;
 import com.example.TMTBEMemberServer.application.port.out.dto.SignInResponseDto;
 import com.example.TMTBEMemberServer.application.port.in.usecase.PayPasswordUsecase;
 import com.example.TMTBEMemberServer.application.port.in.usecase.RandomNicknameUsecase;
@@ -19,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +46,8 @@ public class MemberController {
     private final DecodingToken decodingToken;
     private final NickNameChangeUsecase nickNameChangeUsecase;
     private final PayPasswordChangeUsecase payPasswordChangeUsecase;
+    private final SignOutUsecase signOutUsecase;
+    private final PasswordChangeUsecase passwordChangeUsecase;
 
     @PostMapping("/signup") //회원가입
     public BaseResponse<Void> SignUp(@RequestBody SignUpRequestVo signUpRequestVo) {
@@ -69,7 +75,7 @@ public class MemberController {
 
     }
 
-    @PostMapping("/signin")
+    @PostMapping("/signin") //로그인
     public BaseResponse<SignInResponseDto> signin(@RequestBody SignInRequestVo signInRequestVo) {
 
         SignInResponseDto SigninResponseDto = signInUsecase.SigninService(modelMapper.map(signInRequestVo,
@@ -91,13 +97,30 @@ public class MemberController {
         return new BaseResponse<>();
     }
 
-    @PatchMapping("/pay-password")
+    @PatchMapping("/pay-password") //결제비밀번호 재설정
     public BaseResponse<Void> payPasswordChange(@RequestHeader ("Authorization") String jwt,
             @RequestBody PaypasswordChangeRequestVo paypasswordChangeRequestVo) {
 
         String uuid = decodingToken.getUuid(jwt);
         payPasswordChangeUsecase.changePaypassword(modelMapper.map(paypasswordChangeRequestVo,
                 PayPasswordChangeUsecase.PaypasswordChangeRequestDto.class),uuid);
+
+        return new BaseResponse<>();
+    }
+    @PatchMapping("/password")// 비밀번호 변경
+    public BaseResponse<Void> passwordChange(@RequestHeader ("Authorization") String jwt,
+            @RequestBody PasswordChangeRequestVo passwordChangeRequestVo){
+        String uuid = decodingToken.getUuid(jwt);
+        passwordChangeUsecase.passwordChange(modelMapper.map(passwordChangeRequestVo,
+                PasswordChangeUsecase.passwordChangeRequestDto.class),uuid);
+        return new BaseResponse<>();
+    }
+
+    @DeleteMapping("/logout")
+    public BaseResponse<Void> SignOut(@RequestHeader ("Authorization") String jwt){
+
+        String uuid = decodingToken.getUuid(jwt);
+        signOutUsecase.signOut(uuid);
 
         return new BaseResponse<>();
     }

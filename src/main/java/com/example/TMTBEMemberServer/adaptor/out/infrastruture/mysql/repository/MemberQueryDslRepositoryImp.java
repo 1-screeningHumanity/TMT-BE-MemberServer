@@ -30,4 +30,14 @@ public class MemberQueryDslRepositoryImp implements MemberQueryDslRepository {
                 .execute();
 
     }
+
+    public void changeStatusLogout(String uuid){
+
+        jpaQueryFactory
+                .update(memberEntity)
+                .set(memberEntity.status, 3)
+                .where(memberEntity.uuid.eq(uuid))
+                .execute();
+
+    }
 }

@@ -6,6 +6,7 @@ import com.example.TMTBEMemberServer.application.port.out.dto.SignUpDto;
 import com.example.TMTBEMemberServer.application.port.out.outport.SaveSignUpPort;
 import com.example.TMTBEMemberServer.global.common.exception.CustomException;
 import com.example.TMTBEMemberServer.global.common.response.BaseResponseCode;
+import com.example.TMTBEMemberServer.global.common.response.Grade;
 import com.example.TMTBEMemberServer.global.common.response.State;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,9 @@ public class SignUpAdaptor implements SaveSignUpPort {
                 .phoneNumber(signUpDto.getPhoneNumber())
                 .nickname(signUpDto.getNickName())
                 .status(State.SIGNUP.getCode())
+                .grade(Grade.Silver.getCode())
                 .password(hashPassword(signUpDto.getPassword()))
+                .payingPassword("0")
                 .uuid(uuidString)
                 .build();
             signUpJpaRepository.save(member);

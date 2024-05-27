@@ -31,7 +31,8 @@ public class SignUpAdaptor implements SaveSignUpPort {
         UUID uuid =UUID.randomUUID(); //uuid 생성
         String uuidString = uuid.toString();
 
-        if(memberJpaRepository.existsByNickname(signUpDto.getNickName())){ //닉네임 중복검사
+        if(memberJpaRepository.existsByNicknameAndPhoneNumber(signUpDto.getNickName(),
+                signUpDto.getPhoneNumber())){ //닉네임 중복검사
             throw new CustomException(BaseResponseCode.SIGNUP_FAILED);
         }MemberEntity member = MemberEntity.builder()
                 .name(signUpDto.getName())

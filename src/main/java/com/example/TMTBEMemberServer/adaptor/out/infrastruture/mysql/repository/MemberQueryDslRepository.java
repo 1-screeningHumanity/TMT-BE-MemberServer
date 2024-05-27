@@ -6,4 +6,6 @@ public interface MemberQueryDslRepository {
     void changeStatusLogin(Long memberId);
     void nicknameChange(NicknameChange nicknameChange);
     void changeStatusLogout(String uuid);
+
+    void changeStatusOut(String uuid);
 }

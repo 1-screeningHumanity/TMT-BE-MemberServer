@@ -6,6 +6,7 @@ import com.example.TMTBEMemberServer.adaptor.in.web.vo.PayPasswordRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PaypasswordChangeRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.SignInRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.SignUpRequestVo;
+import com.example.TMTBEMemberServer.application.port.in.usecase.DeleteAccountUsecase;
 import com.example.TMTBEMemberServer.application.port.in.usecase.NickNameChangeUsecase;
 import com.example.TMTBEMemberServer.application.port.in.usecase.PasswordChangeUsecase;
 import com.example.TMTBEMemberServer.application.port.in.usecase.PayPasswordChangeUsecase;
@@ -48,6 +49,7 @@ public class MemberController {
     private final PayPasswordChangeUsecase payPasswordChangeUsecase;
     private final SignOutUsecase signOutUsecase;
     private final PasswordChangeUsecase passwordChangeUsecase;
+    private final DeleteAccountUsecase deleteAccountUsecase;
 
     @PostMapping("/signup") //회원가입
     public BaseResponse<Void> SignUp(@RequestBody SignUpRequestVo signUpRequestVo) {
@@ -116,13 +118,21 @@ public class MemberController {
         return new BaseResponse<>();
     }
 
-    @DeleteMapping("/logout")
+    @DeleteMapping("/logout")//로그아웃
     public BaseResponse<Void> SignOut(@RequestHeader ("Authorization") String jwt){
 
         String uuid = decodingToken.getUuid(jwt);
         signOutUsecase.signOut(uuid);
 
         return new BaseResponse<>();
+    }
+
+    @DeleteMapping
+    public BaseResponse<Void> deleteAccount(@RequestHeader ("Authorization") String jwt){
+        String uuid = decodingToken.getUuid(jwt);
+        deleteAccountUsecase.deleteAccountService(uuid);
+        return new BaseResponse<>();
+
     }
 
 }

@@ -28,6 +28,9 @@ public enum BaseResponseCode {
     TEST_ERROR(HttpStatus.BAD_REQUEST, false, 1234, "Test용 Error Message 입니다"),
     //SignUp
     SIGNUP_FAILED(HttpStatus.BAD_REQUEST, false, 1000, "중복된 닉네임"),
+    WRONG_NAME_PHONE_NUMBER(HttpStatus.BAD_REQUEST, false, 1001, "이름, 전화번호가 일치하지 않습니다"),
+    WRONG_PASSWORD(HttpStatus.BAD_REQUEST, false, 1002, "비밀번호가 일치하지 않습니다"),
+    SIGNIN_FAILED(HttpStatus.BAD_REQUEST, false, 1003, "로그인 실패"),
     //
 
     //공통 에러. 9000 ~ 9999

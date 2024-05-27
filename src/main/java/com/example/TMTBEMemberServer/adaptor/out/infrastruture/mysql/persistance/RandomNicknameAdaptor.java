@@ -1,6 +1,6 @@
 package com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.persistance;
 
-import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.SignUpJpaRepository;
+import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.MemberJpaRepository;
 import com.example.TMTBEMemberServer.application.port.out.dto.RandomNicknameDto;
 import com.example.TMTBEMemberServer.application.port.out.outport.LoadRandomNicknamePort;
 import lombok.RequiredArgsConstructor;
@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class RandomNicknameAdaptor implements LoadRandomNicknamePort {
 
-    private final SignUpJpaRepository signUpJpaRepository;
+    private final MemberJpaRepository memberJpaRepository;
     @Override
     @Transactional
     public Boolean loadRandomNickname(RandomNicknameDto randomNicknameDto) {
-        return signUpJpaRepository.existsByNickname(randomNicknameDto.getNickname());
+        return memberJpaRepository.existsByNickname(randomNicknameDto.getNickname());
     }
 
 }

@@ -7,16 +7,17 @@ spring:
     password: 12345678
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-#  redis:
-#    host: localhost
-#    port: 6379
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
+
+  redis:
+    host: localhost
+    port: 6379
 
 server:
   port: 8080
@@ -46,4 +47,6 @@ springdoc:
 
 #Token
 JWT:
+  access-expiration: 300000     # 한 시간
+  refresh-expiration: 86400000 #일주일
   SECRET_KEY: sldkfjsoidfjwoeir12393012809vxcv89usdfkjn1203491iu0isdfl

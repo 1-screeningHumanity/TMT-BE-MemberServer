@@ -1,11 +1,15 @@
 package com.example.TMTBEMemberServer.adaptor.in.web.controller;
 
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PayPasswordRequestVo;
+import com.example.TMTBEMemberServer.adaptor.in.web.vo.SignInRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.SignUpRequestVo;
+import com.example.TMTBEMemberServer.application.port.out.dto.SignInResponseDto;
 import com.example.TMTBEMemberServer.application.port.in.usecase.PayPasswordUsecase;
 import com.example.TMTBEMemberServer.application.port.in.usecase.RandomNicknameUsecase;
+import com.example.TMTBEMemberServer.application.port.in.usecase.SignInUsecase;
 import com.example.TMTBEMemberServer.application.port.in.usecase.SignUpUsecase;
 import com.example.TMTBEMemberServer.application.port.out.dto.RandomNicknameDto;
+import com.example.TMTBEMemberServer.domain.SignIn;
 import com.example.TMTBEMemberServer.global.common.response.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +32,8 @@ public class MemberController {
     private final SignUpUsecase signUpUsecase;
     private final RandomNicknameUsecase randomNicknameUsecase;
     private final PayPasswordUsecase payPasswordUsecase;
+    private final SignInUsecase signInUsecase;
+
     @PostMapping("/signup") //회원가입
     public BaseResponse<Void> SignUp(@RequestBody SignUpRequestVo signUpRequestVo) {
 
@@ -39,7 +45,6 @@ public class MemberController {
     @GetMapping("/random-nickname") //랜덤 닉네임생성
     public BaseResponse<String> randomNickName() {
 
-        randomNicknameUsecase.createRamdomNickName();
         RandomNicknameDto randomNicknameDto = randomNicknameUsecase.createRamdomNickName();
         String result = randomNicknameDto.getNickname();
         return new BaseResponse<>(result);
@@ -52,6 +57,15 @@ public class MemberController {
         payPasswordUsecase.payPasswordUpdate(modelMapper.map(payPasswordRequestVo,
                 PayPasswordUsecase.payPasswordRequestDto.class));
         return new BaseResponse<>();
+
+    }
+
+    @PostMapping("/signin")
+    public BaseResponse<SignInResponseDto> signin(@RequestBody SignInRequestVo signInRequestVo) {
+
+        SignInResponseDto SigninResponseDto = signInUsecase.SigninService(modelMapper.map(signInRequestVo,
+                SignInUsecase.SigninRequestDto.class));
+        return new BaseResponse<>(SigninResponseDto);
 
     }
 

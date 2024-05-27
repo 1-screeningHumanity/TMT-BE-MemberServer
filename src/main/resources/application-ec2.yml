@@ -2,9 +2,9 @@ spring:
   application:
     name: TMT-BE-MemberServer
   datasource:
-    url: ${DEFAULT_DB}
-    username: ${DEFAULT_DB_USER}
-    password: ${DEFAULT_DB_PW}
+    url: ${MEMBER_DB}
+    username: ${MEMBER_DB_USER}
+    password: ${MEMBER_DB_PW}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

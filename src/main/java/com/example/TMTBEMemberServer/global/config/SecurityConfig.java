@@ -26,6 +26,10 @@ public class SecurityConfig{
                 .sessionManagement((session)->session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));//세션은 stateless 설정
 
+        http
+                .logout((logout) -> logout
+                        .logoutUrl("/logout"));
+
         return http.build();
 
 

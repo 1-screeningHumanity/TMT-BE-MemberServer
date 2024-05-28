@@ -17,10 +17,9 @@ public class SignOutService implements SignOutUsecase {
 
 
     public void signOut(String uuid){
-
         redisTemplate.delete(uuid);
-        log.info("11111111111111");
         loadSignoutPort.statusLogout(uuid);
+
     }
 
 }

@@ -123,11 +123,10 @@ public class MemberController {
 
         String uuid = decodingToken.getUuid(jwt);
         signOutUsecase.signOut(uuid);
-
         return new BaseResponse<>();
     }
 
-    @DeleteMapping
+    @DeleteMapping() //회원탈퇴
     public BaseResponse<Void> deleteAccount(@RequestHeader ("Authorization") String jwt){
         String uuid = decodingToken.getUuid(jwt);
         deleteAccountUsecase.deleteAccountService(uuid);

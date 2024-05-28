@@ -1,7 +1,7 @@
 package com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.persistance;
 
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity.MemberEntity;
-import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.SignUpJpaRepository;
+import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.MemberJpaRepository;
 import com.example.TMTBEMemberServer.application.port.out.dto.SignUpDto;
 import com.example.TMTBEMemberServer.application.port.out.outport.SaveSignUpPort;
 import com.example.TMTBEMemberServer.global.common.exception.CustomException;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class SignUpAdaptor implements SaveSignUpPort {
 
-    private final SignUpJpaRepository signUpJpaRepository;
+    private final MemberJpaRepository memberJpaRepository;
     public String hashPassword(String Password) { //PW 해시 암호화
         Password = new BCryptPasswordEncoder().encode(Password);
         return Password;
@@ -31,18 +31,19 @@ public class SignUpAdaptor implements SaveSignUpPort {
         UUID uuid =UUID.randomUUID(); //uuid 생성
         String uuidString = uuid.toString();
 
-        if(signUpJpaRepository.existsByNickname(signUpDto.getNickName())){ //닉네임 중복검사
+        if(memberJpaRepository.existsByNicknameAndPhoneNumber(signUpDto.getNickName(),
+                signUpDto.getPhoneNumber())){ //닉네임 중복검사
             throw new CustomException(BaseResponseCode.SIGNUP_FAILED);
         }MemberEntity member = MemberEntity.builder()
                 .name(signUpDto.getName())
                 .phoneNumber(signUpDto.getPhoneNumber())
                 .nickname(signUpDto.getNickName())
-                .status(State.SIGNUP.getCode())
+                .status(State.SIGNUP)
                 .grade(Grade.Silver.getCode())
                 .password(hashPassword(signUpDto.getPassword()))
                 .payingPassword("0")
                 .uuid(uuidString)
                 .build();
-            signUpJpaRepository.save(member);
+            memberJpaRepository.save(member);
     }
 }

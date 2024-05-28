@@ -5,18 +5,17 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+public interface PasswordChangeUsecase {
+    void passwordChange(passwordChangeRequestDto passwordChangeRequestDto, String uuid);
 
-public interface PayPasswordUsecase {
-
-
-    void payPasswordUpdate(payPasswordRequestDto payPasswordRequestDto);
     @Getter
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    class payPasswordRequestDto{
-        private String nickname;
-        private String payingPassword;
+    class passwordChangeRequestDto{
+        private String password;
+
     }
+
 
 }

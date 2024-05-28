@@ -24,6 +24,8 @@ public class QMemberEntity extends EntityPathBase<MemberEntity> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
+    public final NumberPath<Integer> grade = createNumber("grade", Integer.class);
+
     public final NumberPath<Long> memberId = createNumber("memberId", Long.class);
 
     //inherited
@@ -39,7 +41,7 @@ public class QMemberEntity extends EntityPathBase<MemberEntity> {
 
     public final StringPath phoneNumber = createString("phoneNumber");
 
-    public final NumberPath<Integer> status = createNumber("status", Integer.class);
+    public final EnumPath<com.example.TMTBEMemberServer.global.common.response.State> status = createEnum("status", com.example.TMTBEMemberServer.global.common.response.State.class);
 
     public final StringPath uuid = createString("uuid");
 

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RandomNickname {
-    private String nickname;
+public class DeleteAccount {
+    private String uuid;
+
 }

@@ -15,9 +15,5 @@ public enum State {
     State(int code) {
         this.code = code;
     }
-
-    public int getCode() {
-        return code;
-    }
-
+    
 }

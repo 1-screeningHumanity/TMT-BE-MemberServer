@@ -3,6 +3,7 @@ package com.example.TMTBEMemberServer.application.service;
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity.MemberEntity;
 import com.example.TMTBEMemberServer.application.port.out.dto.SignInResponseDto;
 import com.example.TMTBEMemberServer.application.port.in.usecase.SignInUsecase;
+import com.example.TMTBEMemberServer.application.port.out.dto.UuidDto;
 import com.example.TMTBEMemberServer.application.port.out.outport.LoadSignInPort;
 import com.example.TMTBEMemberServer.domain.SignIn;
 import com.example.TMTBEMemberServer.global.common.exception.CustomException;
@@ -31,13 +32,12 @@ public class SignInService implements SignInUsecase {
     @Override
     public SignInResponseDto SigninService(SigninRequestDto signinRequestDto){
         SignIn signIn = modelMapper.map(signinRequestDto, SignIn.class);
-        Optional<MemberEntity> optionalMember = loadSignInPort.signIn(signIn);
+        UuidDto Member = loadSignInPort.signIn(signIn);
 
-        if(optionalMember.isPresent()) {
-            MemberEntity member = optionalMember.get();
+        if(Member != null) {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            member.getUuid(),
+                            Member.getUuid(),
                             signIn.getPassword()
                     )
             );
@@ -45,10 +45,10 @@ public class SignInService implements SignInUsecase {
             String accessToken = jwtUtil.createAccessToken(authentication); // 사용자 Access 토큰 생성
             String refreshToken = jwtUtil.createRefreshToken(authentication); // 사용자 Refresh 토큰 생성
 
-            loadSignInPort.changeStatusLogIn(member.getMemberId());
+            loadSignInPort.changeStatusLogIn(Member.getMemberId());
 
             return SignInResponseDto.builder()
-                    .name(member.getName())
+                    .name(signIn.getName())
                     .accessToken(accessToken)
                     .refreshToken(refreshToken)
                     .build();

@@ -118,9 +118,8 @@ public class MemberController {
         return new BaseResponse<>();
     }
 
-    @DeleteMapping("/logout")//로그아웃
-    public BaseResponse<Void> SignOut(@RequestHeader ("Authorization") String jwt){
-
+    @PostMapping("/signout")//로그아웃
+    public BaseResponse<Void> signOut(@RequestHeader ("Authorization") String jwt){
         String uuid = decodingToken.getUuid(jwt);
         signOutUsecase.signOut(uuid);
         return new BaseResponse<>();
@@ -133,5 +132,6 @@ public class MemberController {
         return new BaseResponse<>();
 
     }
+
 
 }

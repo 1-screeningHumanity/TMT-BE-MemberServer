@@ -29,7 +29,7 @@ public enum BaseResponseCode {
     //SignUp
     SIGNUP_FAILED(HttpStatus.BAD_REQUEST, false, 1000, "중복된 닉네임"),
     WRONG_NAME_PHONE_NUMBER(HttpStatus.BAD_REQUEST, false, 1001, "이름, 전화번호가 일치하지 않습니다"),
-    WRONG_PASSWORD(HttpStatus.BAD_REQUEST, false, 1002, "비밀번호가 일치하지 않습니다"),
+    WRONG_PASSWORD(HttpStatus.BAD_REQUEST, false, 1002, "찾을수 없는 회원정보"),
     SIGNIN_FAILED(HttpStatus.BAD_REQUEST, false, 1003, "로그인 실패"),
     WRONG_TOKEN(HttpStatus.UNAUTHORIZED, false, 1004, "잘못된 토큰값"),
     //

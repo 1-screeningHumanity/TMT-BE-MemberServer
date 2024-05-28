@@ -3,6 +3,7 @@ package com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository
 import static com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity.QMemberEntity.memberEntity;
 
 import com.example.TMTBEMemberServer.domain.NicknameChange;
+import com.example.TMTBEMemberServer.global.common.response.State;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -16,7 +17,7 @@ public class MemberQueryDslRepositoryImp implements MemberQueryDslRepository {
 
         jpaQueryFactory
                 .update(memberEntity)
-                .set(memberEntity.status, 2)
+                .set(memberEntity.status, State.SIGNIN)
                 .where(memberEntity.memberId.eq(memberId))
                 .execute();
     }
@@ -34,7 +35,7 @@ public class MemberQueryDslRepositoryImp implements MemberQueryDslRepository {
 
         jpaQueryFactory
                 .update(memberEntity)
-                .set(memberEntity.status, 3)
+                .set(memberEntity.status, State.SIGNOUT)
                 .where(memberEntity.uuid.eq(uuid))
                 .execute();
 
@@ -42,7 +43,7 @@ public class MemberQueryDslRepositoryImp implements MemberQueryDslRepository {
     public void changeStatusOut(String uuid){
         jpaQueryFactory
                 .update(memberEntity)
-                .set(memberEntity.status, 4)
+                .set(memberEntity.status, State.OUT)
                 .where(memberEntity.uuid.eq(uuid))
                 .execute();
     }

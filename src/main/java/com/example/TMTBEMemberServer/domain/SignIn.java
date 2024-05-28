@@ -15,5 +15,9 @@ public class SignIn {
     private String name;
     private String password;
     private String phoneNumber;
+    private String uuid;
+
+
+
 
 }

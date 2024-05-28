@@ -3,11 +3,11 @@ package com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.persistanc
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity.MemberEntity;
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.MemberJpaRepository;
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.MemberQueryDslRepository;
+import com.example.TMTBEMemberServer.application.port.out.dto.UuidDto;
 import com.example.TMTBEMemberServer.application.port.out.outport.LoadSignInPort;
 import com.example.TMTBEMemberServer.domain.SignIn;
 import com.example.TMTBEMemberServer.global.common.exception.CustomException;
 import com.example.TMTBEMemberServer.global.common.response.BaseResponseCode;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,7 +23,7 @@ public class SignInAdaptor implements LoadSignInPort {
     private final MemberQueryDslRepository memberQueryDslRepository;
     @Override
     @Transactional
-    public Optional<MemberEntity> signIn(SignIn signIn){
+    public UuidDto signIn(SignIn signIn){
 
         MemberEntity member = memberJpaRepository.findByNameAndPhoneNumber(signIn.getName(),
                 signIn.getPhoneNumber());
@@ -34,7 +34,12 @@ public class SignInAdaptor implements LoadSignInPort {
         if (!(encoder.matches(signIn.getPassword(), member.getPassword()))) {
             throw new CustomException(BaseResponseCode.WRONG_PASSWORD); //PW 가 다르면 로그인 실패
         }
-        return Optional.of(member);
+
+        return UuidDto
+                .builder()
+                .memberId(member.getMemberId())
+                .uuid(member.getUuid())
+                .build();
 
     }
     @Override

@@ -1,9 +1,8 @@
 package com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity;
 
 import com.example.TMTBEMemberServer.domain.SignUp;
-import com.example.TMTBEMemberServer.global.common.response.State;
+import com.example.TMTBEMemberServer.global.common.enumclass.State;
 import com.example.TMTBEMemberServer.global.entity.BaseEntity;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -20,7 +19,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 @Entity
 @Getter

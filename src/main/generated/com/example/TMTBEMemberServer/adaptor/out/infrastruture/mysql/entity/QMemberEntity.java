@@ -41,7 +41,7 @@ public class QMemberEntity extends EntityPathBase<MemberEntity> {
 
     public final StringPath phoneNumber = createString("phoneNumber");
 
-    public final EnumPath<com.example.TMTBEMemberServer.global.common.response.State> status = createEnum("status", com.example.TMTBEMemberServer.global.common.response.State.class);
+    public final EnumPath<com.example.TMTBEMemberServer.global.common.enumclass.State> status = createEnum("status", com.example.TMTBEMemberServer.global.common.enumclass.State.class);
 
     public final StringPath uuid = createString("uuid");
 

@@ -1,4 +1,4 @@
-package com.example.TMTBEMemberServer.global.common.response;
+package com.example.TMTBEMemberServer.global.common.enumclass;
 
 import lombok.Getter;
 

@@ -35,8 +35,8 @@ dependencies {
 	//Validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-//	//Eureka Client
-//	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	//Eureka Client
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
 	//Web
 	implementation 'org.springframework.boot:spring-boot-starter-web'

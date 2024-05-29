@@ -17,6 +17,12 @@ spring:
     host: localhost
     port: 6379
 
+  COOLSMS:
+    KEY: ${API_KEY}
+    SECRET: ${API_SECRET}
+    FROM: ${FROM_NUMBER}
+
+
 
 server:
   port: 8080

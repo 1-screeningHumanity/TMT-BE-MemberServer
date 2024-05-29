@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberJpaRepository extends JpaRepository<MemberEntity, Long> {
     MemberEntity findByNickname(String nickname);
-    boolean existsByNicknameAndPhoneNumber(String nickname,String phoneNumber); //닉네임 중복체크
+    boolean existsByNickname(String nickname); //닉네임 중복체크
 
-    boolean existsByNickname(String Nickname);
+    boolean existsByPhoneNumber(String phoneNumber);
+
 
     MemberEntity findByNameAndPhoneNumber(String name, String phoneNumber);
 

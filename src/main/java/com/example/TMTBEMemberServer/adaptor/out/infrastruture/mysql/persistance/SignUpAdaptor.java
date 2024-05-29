@@ -5,6 +5,7 @@ import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.
 import com.example.TMTBEMemberServer.application.port.out.dto.SignUpDto;
 import com.example.TMTBEMemberServer.application.port.out.outport.SaveSignUpPort;
 import com.example.TMTBEMemberServer.global.common.exception.CustomException;
+import com.example.TMTBEMemberServer.global.common.response.BaseResponse;
 import com.example.TMTBEMemberServer.global.common.response.BaseResponseCode;
 import com.example.TMTBEMemberServer.global.common.response.Grade;
 import com.example.TMTBEMemberServer.global.common.response.State;
@@ -31,10 +32,12 @@ public class SignUpAdaptor implements SaveSignUpPort {
         UUID uuid =UUID.randomUUID(); //uuid 생성
         String uuidString = uuid.toString();
 
-        if(memberJpaRepository.existsByNicknameAndPhoneNumber(signUpDto.getNickName(),
-                signUpDto.getPhoneNumber())){ //닉네임 중복검사
+        if(memberJpaRepository.existsByNickname(signUpDto.getNickName())){ //닉네임 중복검사
             throw new CustomException(BaseResponseCode.SIGNUP_FAILED);
-        }MemberEntity member = MemberEntity.builder()
+        }else if (memberJpaRepository.existsByPhoneNumber(signUpDto.getPhoneNumber())){
+            throw new CustomException(BaseResponseCode.EXIST_PHONENUMBER);
+        }
+        MemberEntity member = MemberEntity.builder()
                 .name(signUpDto.getName())
                 .phoneNumber(signUpDto.getPhoneNumber())
                 .nickname(signUpDto.getNickName())

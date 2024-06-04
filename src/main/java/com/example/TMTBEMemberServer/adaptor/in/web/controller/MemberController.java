@@ -50,6 +50,7 @@ public class MemberController {
     private final SignOutUsecase signOutUsecase;
     private final PasswordChangeUsecase passwordChangeUsecase;
     private final DeleteAccountUsecase deleteAccountUsecase;
+//    private final TokenUsecase tokenUsecase;
 
     @PostMapping("/signup") //회원가입
     public BaseResponse<Void> SignUp(@RequestBody SignUpRequestVo signUpRequestVo) {
@@ -132,6 +133,16 @@ public class MemberController {
         return new BaseResponse<>();
 
     }
+
+//    @PostMapping("")
+//    public BaseResponse<Void> tokenExpired(@RequestHeader ("Authorization") String jwt){
+////
+////        String uuid = decodingToken.getUuid(jwt);
+//        tokenUsecase.reissueToken(jwt);
+//        return new BaseResponse<>();
+//
+//    }
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity;
 
 import com.example.TMTBEMemberServer.domain.SignUp;
+import com.example.TMTBEMemberServer.global.common.enumclass.Grade;
 import com.example.TMTBEMemberServer.global.common.enumclass.State;
 import com.example.TMTBEMemberServer.global.entity.BaseEntity;
 import jakarta.persistence.Entity;
@@ -45,7 +46,8 @@ public class MemberEntity extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private State status; //회원상태
 
-    private int grade; //회원등급
+    @Enumerated(EnumType.STRING)
+    private Grade grade; //회원등급
 
     private String phoneNumber; //전화번호
 

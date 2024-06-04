@@ -8,4 +8,6 @@ public interface MemberQueryDslRepository {
     void changeStatusLogout(String uuid);
 
     void changeStatusOut(String uuid);
+
+    String myNickname(String uuid);
 }

@@ -24,7 +24,7 @@ public class QMemberEntity extends EntityPathBase<MemberEntity> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
-    public final NumberPath<Integer> grade = createNumber("grade", Integer.class);
+    public final EnumPath<com.example.TMTBEMemberServer.global.common.enumclass.Grade> grade = createEnum("grade", com.example.TMTBEMemberServer.global.common.enumclass.Grade.class);
 
     public final NumberPath<Long> memberId = createNumber("memberId", Long.class);
 

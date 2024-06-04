@@ -1,5 +1,7 @@
 package com.example.TMTBEMemberServer.global.common.enumclass;
 
+import com.example.TMTBEMemberServer.global.common.exception.CustomException;
+import com.example.TMTBEMemberServer.global.common.response.BaseResponseCode;
 import lombok.Getter;
 
 @Getter
@@ -15,5 +17,4 @@ public enum State {
     State(String code) {
         this.code = code;
     }
-    
 }

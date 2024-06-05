@@ -11,6 +11,8 @@ import com.example.TMTBEMemberServer.application.port.in.usecase.NickNameChangeU
 import com.example.TMTBEMemberServer.application.port.in.usecase.PasswordChangeUsecase;
 import com.example.TMTBEMemberServer.application.port.in.usecase.PayPasswordChangeUsecase;
 import com.example.TMTBEMemberServer.application.port.in.usecase.SignOutUsecase;
+import com.example.TMTBEMemberServer.application.port.in.usecase.TokenUsecase;
+import com.example.TMTBEMemberServer.application.port.out.dto.ReAccessTokenDto;
 import com.example.TMTBEMemberServer.application.port.out.dto.SignInResponseDto;
 import com.example.TMTBEMemberServer.application.port.in.usecase.PayPasswordUsecase;
 import com.example.TMTBEMemberServer.application.port.in.usecase.RandomNicknameUsecase;
@@ -29,11 +31,9 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
 @RequiredArgsConstructor
 @Slf4j
 @Validated
@@ -50,6 +50,7 @@ public class MemberController {
     private final SignOutUsecase signOutUsecase;
     private final PasswordChangeUsecase passwordChangeUsecase;
     private final DeleteAccountUsecase deleteAccountUsecase;
+    private final TokenUsecase tokenUsecase;
 
     @PostMapping("/signup") //회원가입
     public BaseResponse<Void> SignUp(@RequestBody SignUpRequestVo signUpRequestVo) {
@@ -132,6 +133,18 @@ public class MemberController {
         return new BaseResponse<>();
 
     }
+
+
+    @PostMapping("") //Access Token 재생성
+    public BaseResponse<ReAccessTokenDto> tokenExpired(@RequestHeader ("Authorization") String jwt){
+
+        ReAccessTokenDto reAccessToken = tokenUsecase.reissueToken(jwt);
+        return new BaseResponse<>(reAccessToken);
+
+    }
+
+
+
 
 
 }

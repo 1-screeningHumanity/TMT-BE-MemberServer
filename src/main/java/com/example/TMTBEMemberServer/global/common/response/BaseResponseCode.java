@@ -31,9 +31,10 @@ public enum BaseResponseCode {
     WRONG_NAME_PHONE_NUMBER(HttpStatus.BAD_REQUEST, false, 1001, "이름, 전화번호가 일치하지 않습니다"),
     WRONG_PASSWORD(HttpStatus.BAD_REQUEST, false, 1002, "찾을수 없는 회원정보"),
     SIGNIN_FAILED(HttpStatus.BAD_REQUEST, false, 1003, "로그인 실패"),
-    WRONG_TOKEN(HttpStatus.UNAUTHORIZED, false, 1004, "잘못된 토큰값"),
+    EMPTY_TOKEN(HttpStatus.UNAUTHORIZED, false, 1004, "토큰이 들어있지 않습니다."),
     EXIST_PHONENUMBER(HttpStatus.BAD_REQUEST, false, 1005, "이미 등록된 전화번호입니다."),
     WRONG_VARIFYCODE(HttpStatus.BAD_REQUEST, false, 1006, "잘못된 인증번호입니다."),
+    WRONG_TOKEN(HttpStatus.UNAUTHORIZED, false, 1007, "잘못된 RefreshToken"),
     //
 
     //공통 에러. 9000 ~ 9999

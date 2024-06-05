@@ -142,9 +142,5 @@ public class MemberController {
         return new BaseResponse<>(reAccessToken);
 
     }
-
-
-
-
-
+  
 }

@@ -11,10 +11,10 @@ public enum Grade {
     Diamond("4"),//다이아몬드 등금
     Master("5"), //마스터등금
     Challenger("6");//챌린저 등급
-
     private final String code;
 
-    Grade(String code){
+    Grade(String code) {
         this.code = code;
     }
+
 }

@@ -29,6 +29,7 @@ public class PasswordChangeAdaptor implements SavePasswordPort {
                 .uuid(member.get().getUuid())
                 .status(member.get().getStatus())
                 .grade(member.get().getGrade())
+                .payingPassword(member.get().getPayingPassword())
                 .phoneNumber(member.get().getPhoneNumber())
                 .build());
     }

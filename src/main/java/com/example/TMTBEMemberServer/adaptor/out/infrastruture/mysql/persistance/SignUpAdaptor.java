@@ -31,7 +31,7 @@ public class SignUpAdaptor implements SaveSignUpPort {
         UUID uuid =UUID.randomUUID(); //uuid 생성
         String uuidString = uuid.toString();
 
-        if(memberJpaRepository.existsByNickname(signUpDto.getNickName())){ //닉네임 중복검사
+        if(memberJpaRepository.existsByNickname(signUpDto.getNickname())){ //닉네임 중복검사
             throw new CustomException(BaseResponseCode.SIGNUP_FAILED);
         }else if (memberJpaRepository.existsByPhoneNumber(signUpDto.getPhoneNumber())){
             throw new CustomException(BaseResponseCode.EXIST_PHONENUMBER);
@@ -39,7 +39,7 @@ public class SignUpAdaptor implements SaveSignUpPort {
         MemberEntity member = MemberEntity.builder()
                 .name(signUpDto.getName())
                 .phoneNumber(signUpDto.getPhoneNumber())
-                .nickname(signUpDto.getNickName())
+                .nickname(signUpDto.getNickname())
                 .status(State.SIGNUP)
                 .grade(Grade.Silver)
                 .password(hashPassword(signUpDto.getPassword()))

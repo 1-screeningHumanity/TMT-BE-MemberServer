@@ -26,19 +26,24 @@ public class PayPasswordAdaptor implements SavePayPasswordPort {
     @Override
     @Transactional //결제 패스워드 수정.
     public void savePayPassword(PayPassword payPassword) {
-        MemberEntity member = memberJpaRepository.findByNickname(payPassword.getNickname());
-        MemberEntity updatePaypassword = MemberEntity.builder()
-                .name(member.getName())
-                .memberId(member.getMemberId())
-                .password(member.getPassword())
-                .nickname(member.getNickname())
-                .payingPassword(hashPassword(payPassword.getPayingPassword()))
-                .uuid(member.getUuid())
-                .status(member.getStatus())
-                .grade(member.getGrade())
-                .phoneNumber(member.getPhoneNumber())
-                .build();
-        memberJpaRepository.save(updatePaypassword);
+        log.info("nickname:{}", payPassword.getNickname());
+        log.info("paypassword:{}", payPassword.getPayingPassword());
+
+        Optional<MemberEntity> member = memberJpaRepository.findByNickname(payPassword.getNickname());
+
+            MemberEntity insertPassword = MemberEntity.builder()
+                    .memberId(member.get().getMemberId())
+                    .name(member.get().getName())
+                    .password(member.get().getPassword())
+                    .nickname(member.get().getNickname())
+                    .payingPassword(hashPassword(payPassword.getPayingPassword()))
+                    .uuid(member.get().getUuid())
+                    .status(member.get().getStatus())
+                    .grade(member.get().getGrade())
+                    .phoneNumber(member.get().getPhoneNumber())
+                    .build();
+            memberJpaRepository.save(insertPassword);
+
     }
 
     @Override
@@ -47,6 +52,7 @@ public class PayPasswordAdaptor implements SavePayPasswordPort {
         Optional<MemberEntity> member = memberJpaRepository.findByUuid(payPasswordChange.getUuid());
         MemberEntity changePaypassword = MemberEntity.builder()
                 .memberId(member.get().getMemberId())
+                .name(member.get().getName())
                 .password(member.get().getPassword())
                 .nickname(member.get().getNickname())
                 .payingPassword(hashPassword(payPasswordChange.getPayingPassword()))

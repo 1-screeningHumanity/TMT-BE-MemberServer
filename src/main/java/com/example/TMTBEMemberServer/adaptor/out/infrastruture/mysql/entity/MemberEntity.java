@@ -57,7 +57,7 @@ public class MemberEntity extends BaseEntity implements UserDetails {
                 .name(signUp.getName())
                 .password(signUp.getPassword())
                 .phoneNumber(signUp.getPhoneNumber())
-                .nickname(signUp.getNickName())
+                .nickname(signUp.getNickname())
                 .build();
     }
 

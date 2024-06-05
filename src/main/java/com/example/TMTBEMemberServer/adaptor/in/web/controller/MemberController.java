@@ -100,7 +100,7 @@ public class MemberController {
         return new BaseResponse<>();
     }
 
-    @PatchMapping("/pay-password/change") //결제비밀번호 재설정
+    @PatchMapping("/pay-password") //결제비밀번호 재설정
     public BaseResponse<Void> payPasswordChange(@RequestHeader ("Authorization") String jwt,
             @RequestBody PaypasswordChangeRequestVo paypasswordChangeRequestVo) {
 

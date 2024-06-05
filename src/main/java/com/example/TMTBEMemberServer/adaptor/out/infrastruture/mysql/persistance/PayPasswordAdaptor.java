@@ -28,19 +28,20 @@ public class PayPasswordAdaptor implements SavePayPasswordPort {
     public void savePayPassword(PayPassword payPassword) {
 
         MemberEntity member = memberJpaRepository.findByNickname(payPassword.getNickname());
-        MemberEntity insertPaypassword = MemberEntity.builder()
-                .name(member.getName())
-                .memberId(member.getMemberId())
-                .password(member.getPassword())
-                .nickname(member.getNickname())
-                .payingPassword(hashPassword(payPassword.getPayingPassword()))
-                .uuid(member.getUuid())
-                .status(member.getStatus())
-                .grade(member.getGrade())
-                .phoneNumber(member.getPhoneNumber())
-                .build();
-        memberJpaRepository.save(insertPaypassword);
-
+        if(member != null) {
+            MemberEntity insertPaypassword = MemberEntity.builder()
+                    .name(member.getName())
+                    .memberId(member.getMemberId())
+                    .password(member.getPassword())
+                    .nickname(member.getNickname())
+                    .payingPassword(hashPassword(payPassword.getPayingPassword()))
+                    .uuid(member.getUuid())
+                    .status(member.getStatus())
+                    .grade(member.getGrade())
+                    .phoneNumber(member.getPhoneNumber())
+                    .build();
+            memberJpaRepository.save(insertPaypassword);
+        }
     }
 
     @Override

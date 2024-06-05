@@ -100,7 +100,7 @@ public class MemberController {
         return new BaseResponse<>();
     }
 
-    @PatchMapping("/pay-password") //결제비밀번호 재설정
+    @PatchMapping("/pay-password/change") //결제비밀번호 재설정
     public BaseResponse<Void> payPasswordChange(@RequestHeader ("Authorization") String jwt,
             @RequestBody PaypasswordChangeRequestVo paypasswordChangeRequestVo) {
 
@@ -135,7 +135,7 @@ public class MemberController {
     }
 
 
-    @PostMapping("") //Access Token 재생성
+    @PostMapping("/reissue") //Access Token 재생성
     public BaseResponse<ReAccessTokenDto> tokenExpired(@RequestHeader ("Authorization") String jwt){
 
         ReAccessTokenDto reAccessToken = tokenUsecase.reissueToken(jwt);

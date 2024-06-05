@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class PayPasswordRequestVo {
 
     private String payingPassword;
-    private String nickname;
+    private String nickName;
 
 }

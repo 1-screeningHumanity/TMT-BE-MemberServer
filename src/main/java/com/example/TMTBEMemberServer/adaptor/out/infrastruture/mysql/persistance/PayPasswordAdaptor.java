@@ -26,8 +26,9 @@ public class PayPasswordAdaptor implements SavePayPasswordPort {
     @Override
     @Transactional //결제 패스워드 수정.
     public void savePayPassword(PayPassword payPassword) {
+
         MemberEntity member = memberJpaRepository.findByNickname(payPassword.getNickname());
-        MemberEntity updatePaypassword = MemberEntity.builder()
+        MemberEntity insertPaypassword = MemberEntity.builder()
                 .name(member.getName())
                 .memberId(member.getMemberId())
                 .password(member.getPassword())
@@ -38,7 +39,8 @@ public class PayPasswordAdaptor implements SavePayPasswordPort {
                 .grade(member.getGrade())
                 .phoneNumber(member.getPhoneNumber())
                 .build();
-        memberJpaRepository.save(updatePaypassword);
+        memberJpaRepository.save(insertPaypassword);
+
     }
 
     @Override

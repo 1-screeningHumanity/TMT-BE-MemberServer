@@ -126,7 +126,7 @@ public class MemberController {
         return new BaseResponse<>();
     }
 
-    @DeleteMapping() //회원탈퇴
+    @DeleteMapping("/") //회원탈퇴
     public BaseResponse<Void> deleteAccount(@RequestHeader ("Authorization") String jwt){
         String uuid = decodingToken.getUuid(jwt);
         deleteAccountUsecase.deleteAccountService(uuid);

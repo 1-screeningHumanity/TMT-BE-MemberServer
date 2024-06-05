@@ -21,15 +21,15 @@ public class SignUpDto {
     private String phoneNumber;
     @NotEmpty(message = "닉네임을 입력해주세요.")
     @Pattern(regexp = "^[가-힣a-zA-Z0-9]{1,10}$", message = "닉네임은 한글, 영어, 숫자로 구성되며 1자에서 10자리로 입력해주세요.")
-    private String nickName;
+    private String nickname;
 
     @Builder
     public SignUpDto(Long userId, String name, String password, String phoneNumber,
-            String nickName) {
+            String nickname) {
         this.userId = userId;
         this.name = name;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.nickName = nickName;
+        this.nickname = nickname;
     }
 }

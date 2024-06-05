@@ -54,10 +54,26 @@ public class JWTUtil {
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
 
+
         redisTemplate.opsForValue().  //redis에 refreshToken 저장
                 set(authentication.getName(), refreshToken,
-                refreshTokenExpiration, TimeUnit.MICROSECONDS);
+                refreshTokenExpiration, TimeUnit.MILLISECONDS);
 
         return refreshToken; //refreshToken 리턴
+    }
+
+    public String remakeAccessToken(String uuid){ //AccessToken 재발급
+        Claims claims = Jwts.claims().setSubject(uuid);
+        Date now = new Date();
+        Date expireDate = new Date(now.getTime() + accessTokenExpiration);
+
+        String AccessToken = Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(expireDate)
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
+
+        return AccessToken;
     }
 }

@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberJpaRepository extends JpaRepository<MemberEntity, Long> {
-    MemberEntity findByNickname(String nickname);
+    Optional<MemberEntity> findByNickname(String nickname);
     boolean existsByNickname(String nickname); //닉네임 중복체크
 
     boolean existsByPhoneNumber(String phoneNumber);

@@ -38,4 +38,5 @@ public class DecodingToken {
         return Jwts.parser().setSigningKey(environment.getProperty("JWT.SECRET_KEY"))
                 .parseClaimsJws(jwt).getBody();
     }
+
 }

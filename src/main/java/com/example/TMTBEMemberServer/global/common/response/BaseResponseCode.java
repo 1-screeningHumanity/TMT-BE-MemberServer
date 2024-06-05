@@ -35,6 +35,7 @@ public enum BaseResponseCode {
     EXIST_PHONENUMBER(HttpStatus.BAD_REQUEST, false, 1005, "이미 등록된 전화번호입니다."),
     WRONG_VARIFYCODE(HttpStatus.BAD_REQUEST, false, 1006, "잘못된 인증번호입니다."),
     WRONG_TOKEN(HttpStatus.UNAUTHORIZED, false, 1007, "잘못된 RefreshToken"),
+    WRONG_ACCESSTOKEN(HttpStatus.UNAUTHORIZED, false, 1007, "잘못된 ACCESS TOKEN값"),
     //
 
     //공통 에러. 9000 ~ 9999
@@ -44,6 +45,7 @@ public enum BaseResponseCode {
     REQUEST_PARAM_ERROR(HttpStatus.BAD_REQUEST, false, 9300, "잘못된 Request Parameter 입력"),
     NO_HANDLER_FOUND_ERROR(HttpStatus.BAD_REQUEST, false, 9400, "존재 하지 않는 END-POINT"),
     METHOD_NOT_ALLOW_ERROR(HttpStatus.METHOD_NOT_ALLOWED, false, 9500, "(exception error 메세지에 따름)"),
+    NOT_AVAILABLE_ENUM(HttpStatus.BAD_REQUEST, false, 9600, "올바르지 않은 ENUM값."),
     TOKEN_IS_EXPIRED_ERROR(HttpStatus.UNAUTHORIZED, false, 9999, "(gateway 에서 error 처리)");
 
     private final HttpStatus httpStatus;

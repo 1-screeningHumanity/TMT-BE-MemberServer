@@ -50,7 +50,11 @@ public class MemberController {
     private final SignOutUsecase signOutUsecase;
     private final PasswordChangeUsecase passwordChangeUsecase;
     private final DeleteAccountUsecase deleteAccountUsecase;
+
     private final TokenUsecase tokenUsecase;
+
+//    private final TokenUsecase tokenUsecase;
+
 
     @PostMapping("/signup") //회원가입
     public BaseResponse<Void> SignUp(@RequestBody SignUpRequestVo signUpRequestVo) {
@@ -134,7 +138,6 @@ public class MemberController {
 
     }
 
-
     @PostMapping("/reissue") //Access Token 재생성
     public BaseResponse<ReAccessTokenDto> tokenExpired(@RequestHeader ("Authorization") String jwt){
 
@@ -142,9 +145,5 @@ public class MemberController {
         return new BaseResponse<>(reAccessToken);
 
     }
-
-
-
-
 
 }

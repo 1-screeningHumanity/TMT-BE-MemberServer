@@ -4,10 +4,10 @@ import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity.Memb
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.MemberJpaRepository;
 import com.example.TMTBEMemberServer.application.port.out.dto.SignUpDto;
 import com.example.TMTBEMemberServer.application.port.out.outport.SaveSignUpPort;
+import com.example.TMTBEMemberServer.global.common.enumclass.State;
 import com.example.TMTBEMemberServer.global.common.exception.CustomException;
 import com.example.TMTBEMemberServer.global.common.response.BaseResponseCode;
 import com.example.TMTBEMemberServer.global.common.enumclass.Grade;
-import com.example.TMTBEMemberServer.global.common.enumclass.State;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -1,5 +1,6 @@
 package com.example.TMTBEMemberServer.adaptor.out.kafkaproducer.persistence;
 
+import com.example.TMTBEMemberServer.adaptor.out.kafkaproducer.out.KafkaProducerOutDto;
 import com.example.TMTBEMemberServer.application.port.out.outport.KafkaSendMessagePort;
 import com.example.TMTBEMemberServer.domain.KafkaSendMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,17 +24,21 @@ public class KafkaProducerAdaptor implements KafkaSendMessagePort {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonInString = "";
 
-        String uuid = kafkaSendMessage.getUuid();
+        KafkaProducerOutDto kafkaProducerOutDto = KafkaProducerOutDto
+                .builder()
+                .uuid(kafkaSendMessage.getUuid())
+                .build();
+
         String topic = kafkaSendMessage.getTopic();
 
         try {
-            jsonInString = objectMapper.writeValueAsString(uuid);
+            jsonInString = objectMapper.writeValueAsString(kafkaProducerOutDto);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         kafkaTemplate.send(topic, jsonInString);
-        log.info("send Message = {}", uuid);
+        log.info("send Message = {}", kafkaProducerOutDto.toString());
 
     }
 }

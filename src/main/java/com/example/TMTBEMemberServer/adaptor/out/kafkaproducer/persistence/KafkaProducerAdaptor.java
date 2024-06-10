@@ -28,9 +28,10 @@ public class KafkaProducerAdaptor implements KafkaSendMessagePort {
                 .builder()
                 .uuid(kafkaSendMessage.getUuid())
                 .build();
+        log.info("uuid ={}", kafkaSendMessage.getUuid());
 
         String topic = kafkaSendMessage.getTopic();
-
+        log.info("topic ={}", topic);
         try {
             jsonInString = objectMapper.writeValueAsString(kafkaProducerOutDto);
         } catch (Exception e) {

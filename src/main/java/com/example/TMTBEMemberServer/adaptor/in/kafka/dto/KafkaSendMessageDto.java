@@ -1,4 +1,4 @@
-package com.example.TMTBEMemberServer.domain;
+package com.example.TMTBEMemberServer.adaptor.in.kafka.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class KafkaSendMessage {
+public class KafkaSendMessageDto {
 
     private String uuid;
     private String topic;

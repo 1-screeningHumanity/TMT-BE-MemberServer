@@ -65,3 +65,6 @@ JWT:
   access-expiration: 3000000     # 50분
   refresh-expiration: 864000000 # 10일
   SECRET_KEY: sldkfjsoidfjwoeir12393012809vxcv89usdfkjn1203491iu0isdfl
+
+kafka:
+  bootstrap-server: ${KAFKA_SERVER}

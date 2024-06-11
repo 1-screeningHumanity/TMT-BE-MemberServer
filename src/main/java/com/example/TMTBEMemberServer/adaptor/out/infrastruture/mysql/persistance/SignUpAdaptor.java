@@ -1,7 +1,11 @@
 package com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.persistance;
 
+import com.example.TMTBEMemberServer.adaptor.in.kafka.dto.KafkaSendMessageDto;
+import com.example.TMTBEMemberServer.adaptor.in.kafka.persistance.KafkaProducerAdaptor;
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity.MemberEntity;
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.MemberJpaRepository;
+import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.dto.KafkaProducerWalletDto;
+import com.example.TMTBEMemberServer.application.port.in.usecase.KafkaProducerUsecase;
 import com.example.TMTBEMemberServer.application.port.out.dto.SignUpDto;
 import com.example.TMTBEMemberServer.application.port.out.outport.SaveSignUpPort;
 import com.example.TMTBEMemberServer.global.common.enumclass.State;
@@ -20,6 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class SignUpAdaptor implements SaveSignUpPort {
 
     private final MemberJpaRepository memberJpaRepository;
+    private final KafkaProducerAdaptor kafkaProducerAdaptor;
+
     public String hashPassword(String Password) { //PW 해시 암호화
         Password = new BCryptPasswordEncoder().encode(Password);
         return Password;
@@ -31,7 +37,7 @@ public class SignUpAdaptor implements SaveSignUpPort {
         UUID uuid =UUID.randomUUID(); //uuid 생성
         String uuidString = uuid.toString();
 
-        if(memberJpaRepository.existsByNickname(signUpDto.getNickName())){ //닉네임 중복검사
+        if(memberJpaRepository.existsByNickname(signUpDto.getNickname())){ //닉네임 중복검사
             throw new CustomException(BaseResponseCode.SIGNUP_FAILED);
         }else if (memberJpaRepository.existsByPhoneNumber(signUpDto.getPhoneNumber())){
             throw new CustomException(BaseResponseCode.EXIST_PHONENUMBER);
@@ -39,7 +45,7 @@ public class SignUpAdaptor implements SaveSignUpPort {
         MemberEntity member = MemberEntity.builder()
                 .name(signUpDto.getName())
                 .phoneNumber(signUpDto.getPhoneNumber())
-                .nickname(signUpDto.getNickName())
+                .nickname(signUpDto.getNickname())
                 .status(State.SIGNUP)
                 .grade(Grade.Silver)
                 .password(hashPassword(signUpDto.getPassword()))
@@ -47,5 +53,13 @@ public class SignUpAdaptor implements SaveSignUpPort {
                 .uuid(uuidString)
                 .build();
             memberJpaRepository.save(member);
+
+        KafkaSendMessageDto kafkaSendMessageDto = KafkaSendMessageDto
+                .builder()
+                .uuid(uuidString)
+                .topic("member-payment-signup")
+                .build();
+        kafkaProducerAdaptor.sendMessage(kafkaSendMessageDto);
+
     }
 }

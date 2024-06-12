@@ -12,6 +12,7 @@ public class GradeinfoResponseDto {
 
     @Builder
     public GradeinfoResponseDto(String grade) {
+
         this.grade = grade;
     }
 

@@ -1,6 +1,5 @@
 package com.example.TMTBEMemberServer.adaptor.in.web.controller;
 
-import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.dto.GradeinfoResponseDto;
 import com.example.TMTBEMemberServer.application.port.in.usecase.MyInfoUsecase;
 import com.example.TMTBEMemberServer.application.port.out.dto.MyNicknameRequestDto;
 import com.example.TMTBEMemberServer.global.common.response.BaseResponse;
@@ -31,7 +30,6 @@ public class MypageController {
         MyNicknameRequestDto myNicknameRequestDto = myInfoUsecase.myNickname(uuid);
         return new BaseResponse<>(myNicknameRequestDto);
     }
-
 
     @GetMapping("/grade")
     public BaseResponse<GradeinfoResponseDto> myGrade(@RequestHeader("Authorization") String jwt) {

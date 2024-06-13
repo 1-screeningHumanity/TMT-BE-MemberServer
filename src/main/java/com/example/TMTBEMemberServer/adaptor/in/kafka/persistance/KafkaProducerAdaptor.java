@@ -29,7 +29,8 @@ public class KafkaProducerAdaptor {
         }
 
         kafkaTemplate.send(topic, jsonInString);
-        log.info("send Message = {}", kafkaSendMessage.toString());
+//        log.info("send Message = {}", kafkaSendMessage.toString());
+        log.info("send Message = {}", jsonInString);
 
     }
 }

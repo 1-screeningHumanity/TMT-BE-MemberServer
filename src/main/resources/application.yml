@@ -62,9 +62,12 @@ springdoc:
 
 #Token
 JWT:
-  access-expiration: 3000000     # 50분
+  access-expiration: 9000000000    # 테스트용 104일
   refresh-expiration: 864000000 # 10일
   SECRET_KEY: sldkfjsoidfjwoeir12393012809vxcv89usdfkjn1203491iu0isdfl
+
+
+#3000000 나중에 배포할때는 50분으로 고치기
 
 kafka:
   bootstrap-server: ${KAFKA_SERVER}

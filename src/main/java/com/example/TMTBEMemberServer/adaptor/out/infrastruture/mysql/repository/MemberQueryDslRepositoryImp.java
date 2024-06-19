@@ -3,16 +3,21 @@ package com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository
 import static com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity.QMemberEntity.memberEntity;
 
 import com.example.TMTBEMemberServer.domain.NicknameChange;
+import com.example.TMTBEMemberServer.global.common.enumclass.Grade;
 import com.example.TMTBEMemberServer.global.common.enumclass.State;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
 public class MemberQueryDslRepositoryImp implements MemberQueryDslRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
+
+    @Override
+    @Transactional
     public void changeStatusLogin(Long memberId) {
 
         jpaQueryFactory
@@ -22,6 +27,8 @@ public class MemberQueryDslRepositoryImp implements MemberQueryDslRepository {
                 .execute();
     }
 
+    @Override
+    @Transactional
     public void nicknameChange(NicknameChange nicknameChange){
 
         jpaQueryFactory
@@ -31,6 +38,9 @@ public class MemberQueryDslRepositoryImp implements MemberQueryDslRepository {
                 .execute();
 
     }
+
+    @Override
+    @Transactional
     public void changeStatusLogout(String uuid){
 
         jpaQueryFactory
@@ -40,6 +50,9 @@ public class MemberQueryDslRepositoryImp implements MemberQueryDslRepository {
                 .execute();
 
     }
+
+    @Override
+    @Transactional
     public void changeStatusOut(String uuid){
         jpaQueryFactory
                 .update(memberEntity)
@@ -47,6 +60,8 @@ public class MemberQueryDslRepositoryImp implements MemberQueryDslRepository {
                 .where(memberEntity.uuid.eq(uuid))
                 .execute();
     }
+
+    @Override
     public String myNickname(String uuid){
         return jpaQueryFactory
                 .select(memberEntity.nickname)
@@ -54,4 +69,14 @@ public class MemberQueryDslRepositoryImp implements MemberQueryDslRepository {
                 .where(memberEntity.uuid.eq(uuid))
                 .fetchOne();
     }
+
+    @Override
+    public Grade myGrade(String uuid){
+        return jpaQueryFactory
+                .select(memberEntity.grade)
+                .from(memberEntity)
+                .where(memberEntity.uuid.eq(uuid))
+                .fetchOne();
+    }
+
 }

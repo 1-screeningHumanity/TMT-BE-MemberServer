@@ -5,4 +5,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface SaveNicknameChangePort {
     void saveNicknameChange(NicknameChange nicknameChange);
+
 }

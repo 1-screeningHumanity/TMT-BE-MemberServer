@@ -4,8 +4,6 @@ import com.example.TMTBEMemberServer.adaptor.in.kafka.dto.KafkaSendMessageDto;
 import com.example.TMTBEMemberServer.adaptor.in.kafka.persistance.KafkaProducerAdaptor;
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity.MemberEntity;
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.MemberJpaRepository;
-import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.dto.KafkaProducerWalletDto;
-import com.example.TMTBEMemberServer.application.port.in.usecase.KafkaProducerUsecase;
 import com.example.TMTBEMemberServer.application.port.out.dto.SignUpDto;
 import com.example.TMTBEMemberServer.application.port.out.outport.SaveSignUpPort;
 import com.example.TMTBEMemberServer.global.common.enumclass.State;
@@ -57,7 +55,7 @@ public class SignUpAdaptor implements SaveSignUpPort {
         KafkaSendMessageDto kafkaSendMessageDto = KafkaSendMessageDto
                 .builder()
                 .uuid(uuidString)
-                .topic("member-payment-signup")
+                .nickname(signUpDto.getNickname())
                 .build();
         kafkaProducerAdaptor.sendMessage(kafkaSendMessageDto);
 

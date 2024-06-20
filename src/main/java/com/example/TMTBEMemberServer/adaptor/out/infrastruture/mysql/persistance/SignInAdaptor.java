@@ -22,7 +22,6 @@ public class SignInAdaptor implements LoadSignInPort {
     private final MemberJpaRepository memberJpaRepository;
     private final MemberQueryDslRepository memberQueryDslRepository;
     @Override
-    @Transactional
     public UuidDto signIn(SignIn signIn){
 
         MemberEntity member = memberJpaRepository.findByNameAndPhoneNumber(signIn.getName(),

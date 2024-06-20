@@ -36,12 +36,12 @@ public class KafkaProducerAdaptor {
 
     }
 
-    public void sendNicknameChangeMypage(NicknameKafkaProducerDto nIcknameKafkaProducerDto){
+    public void sendNicknameChangeMypage(NicknameKafkaProducerDto nicknameKafkaProducerDto){
 
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonInString = "";
         try {
-            jsonInString = objectMapper.writeValueAsString(nIcknameKafkaProducerDto);
+            jsonInString = objectMapper.writeValueAsString(nicknameKafkaProducerDto);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -21,7 +21,7 @@ public class MyInfoService implements MyInfoUsecase {
         String nickname = loadMyInfoport.myNickname(uuid);
 
         MyNicknameRequestDto myNicknameRequestDto = MyNicknameRequestDto.builder()
-                .nickanme(nickname)
+                .nickname(nickname)
                 .build();
         return myNicknameRequestDto;
     }

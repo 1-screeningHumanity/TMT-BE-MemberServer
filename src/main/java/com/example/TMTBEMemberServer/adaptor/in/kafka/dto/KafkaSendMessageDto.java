@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class KafkaSendMessageDto {
 
+    private String nickname;
     private String uuid;
-    private String topic;
 
 }

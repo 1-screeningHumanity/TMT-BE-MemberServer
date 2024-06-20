@@ -55,7 +55,7 @@ public class SignUpAdaptor implements SaveSignUpPort {
         KafkaSendMessageDto kafkaSendMessageDto = KafkaSendMessageDto
                 .builder()
                 .uuid(uuidString)
-                .topic("member-payment-signup")
+                .nickname(signUpDto.getNickname())
                 .build();
         kafkaProducerAdaptor.sendMessage(kafkaSendMessageDto);
 

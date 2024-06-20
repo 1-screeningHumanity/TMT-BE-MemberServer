@@ -2,7 +2,9 @@ package com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository
 
 import static com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity.QMemberEntity.memberEntity;
 
-import com.example.TMTBEMemberServer.domain.NicknameChange;
+import com.example.TMTBEMemberServer.adaptor.in.kafka.persistance.KafkaProducerAdaptor;
+import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.dto.NicknameKafkaProducerDto;
+import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.persistance.NicknameChangeAdaptor;
 import com.example.TMTBEMemberServer.global.common.enumclass.Grade;
 import com.example.TMTBEMemberServer.global.common.enumclass.State;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberQueryDslRepositoryImp implements MemberQueryDslRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
+    private final KafkaProducerAdaptor kafkaProducerAdaptor;
 
     @Override
     @Transactional
@@ -25,17 +28,21 @@ public class MemberQueryDslRepositoryImp implements MemberQueryDslRepository {
                 .set(memberEntity.status, State.SIGNIN)
                 .where(memberEntity.memberId.eq(memberId))
                 .execute();
+
     }
 
     @Override
     @Transactional
-    public void nicknameChange(NicknameChange nicknameChange){
+    public void nicknameChange(NicknameKafkaProducerDto nicknameChange){
 
         jpaQueryFactory
                 .update(memberEntity)
-                .set(memberEntity.nickname, nicknameChange.getNickname())
-                .where(memberEntity.uuid.eq(nicknameChange.getUuid()))
+                .set(memberEntity.nickname, nicknameChange.getAfterNickName())
+                .where(memberEntity.nickname.eq(nicknameChange.getBeforeNickName()))
                 .execute();
+
+        kafkaProducerAdaptor.sendNicknameChangeMypage(nicknameChange);
+
 
     }
 

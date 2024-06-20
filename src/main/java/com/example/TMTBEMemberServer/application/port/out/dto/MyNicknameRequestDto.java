@@ -10,7 +10,7 @@ public class MyNicknameRequestDto {
 
     private String nickanme;
     @Builder
-    public MyNicknameRequestDto(String nickanme) {
-        this.nickanme = nickanme;
+    public MyNicknameRequestDto(String nickname) {
+        this.nickanme = nickname;
     }
 }

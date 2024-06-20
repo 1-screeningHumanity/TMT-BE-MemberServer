@@ -10,12 +10,11 @@ import lombok.NoArgsConstructor;
 public class KafkaProducerWalletDto {
 
     private String  uuid;
-    private String topic;
+
 
     @Builder
-    public KafkaProducerWalletDto(String uuid, String topic) {
+    public KafkaProducerWalletDto(String uuid) {
         this.uuid = uuid;
-        this.topic = topic;
     }
 
 }

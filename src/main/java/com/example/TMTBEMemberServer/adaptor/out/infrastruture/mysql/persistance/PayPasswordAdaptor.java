@@ -5,6 +5,9 @@ import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.
 import com.example.TMTBEMemberServer.application.port.out.outport.SavePayPasswordPort;
 import com.example.TMTBEMemberServer.domain.PayPassword;
 import com.example.TMTBEMemberServer.domain.PayPasswordChange;
+import com.example.TMTBEMemberServer.domain.PayPasswordCheck;
+import com.example.TMTBEMemberServer.global.common.exception.CustomException;
+import com.example.TMTBEMemberServer.global.common.response.BaseResponseCode;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -62,5 +65,20 @@ public class PayPasswordAdaptor implements SavePayPasswordPort {
                 .phoneNumber(member.get().getPhoneNumber())
                 .build();
         memberJpaRepository.save(changePaypassword);
+    }
+
+    @Override
+    public void checkPayPassword(PayPasswordCheck payPasswordCheck, String uuid){
+
+        Optional<MemberEntity> member = memberJpaRepository.findByUuid(uuid);
+        if (member == null){
+            throw new CustomException(BaseResponseCode.WRONG_TOKEN);
+        }
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //PW 암호화 시킴
+        if (!(encoder.matches(payPasswordCheck.getPayingPassword(), member.get().getPayingPassword()))) {
+            throw new CustomException(BaseResponseCode.WRONG_PASSWORD); //PW 가 다르면 로그인 실패
+        }
+
     }
 }

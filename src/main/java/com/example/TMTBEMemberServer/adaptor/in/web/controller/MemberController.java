@@ -4,6 +4,7 @@ import com.example.TMTBEMemberServer.adaptor.in.web.vo.NicknameChangeRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PasswordChangeRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PayPasswordRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PaypasswordChangeRequestVo;
+import com.example.TMTBEMemberServer.adaptor.in.web.vo.PaypasswordCheckRequestvo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.SignInRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.SignUpRequestVo;
 import com.example.TMTBEMemberServer.application.port.in.usecase.DeleteAccountUsecase;
@@ -134,12 +135,25 @@ public class MemberController {
 
     }
 
-
     @PostMapping("/reissue") //Access Token 재생성
     public BaseResponse<ReAccessTokenDto> tokenExpired(@RequestHeader ("Authorization") String jwt){
 
         ReAccessTokenDto reAccessToken = tokenUsecase.reissueToken(jwt);
         return new BaseResponse<>(reAccessToken);
+
+    }
+
+    @PostMapping("/pay-password/check")
+    public BaseResponse<Void> checkPayPassword(@RequestHeader ("Authorization") String jwt,
+            @RequestBody PaypasswordCheckRequestvo paypasswordCheckRequestvo){
+
+        String uuid = decodingToken.getUuid(jwt);
+
+        payPasswordUsecase.payPasswordCheck(modelMapper.map(paypasswordCheckRequestvo,
+                PayPasswordUsecase.payPasswordCheckRequestDto.class),uuid);
+
+
+        return new BaseResponse<>();
 
     }
   

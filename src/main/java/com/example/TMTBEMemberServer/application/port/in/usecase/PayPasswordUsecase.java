@@ -19,4 +19,13 @@ public interface PayPasswordUsecase {
         private String payingPassword;
     }
 
+    void payPasswordCheck(payPasswordCheckRequestDto payPasswordCheckRequestDto, String uuid);
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    class payPasswordCheckRequestDto{
+        private String payingPassword;
+    }
+
 }

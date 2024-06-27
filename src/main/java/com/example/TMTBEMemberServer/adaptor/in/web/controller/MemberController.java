@@ -2,6 +2,7 @@ package com.example.TMTBEMemberServer.adaptor.in.web.controller;
 
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.NicknameChangeRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PasswordChangeRequestVo;
+import com.example.TMTBEMemberServer.adaptor.in.web.vo.PasswordChangeWithoutAuthRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PayPasswordRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PaypasswordChangeRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PaypasswordCheckRequestvo;
@@ -117,6 +118,14 @@ public class MemberController {
         String uuid = decodingToken.getUuid(jwt);
         passwordChangeUsecase.passwordChange(modelMapper.map(passwordChangeRequestVo,
                 PasswordChangeUsecase.passwordChangeRequestDto.class),uuid);
+        return new BaseResponse<>();
+    }
+
+    @PatchMapping("/reset/password")// 비밀번호 잊어먹어서 변경하는경우.
+    public BaseResponse<Void> passwordChangeWithoutAuth(
+            @RequestBody PasswordChangeWithoutAuthRequestVo requestVo){
+        passwordChangeUsecase.passwordChangeWithoutAuth(requestVo);
+
         return new BaseResponse<>();
     }
 

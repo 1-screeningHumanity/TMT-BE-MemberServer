@@ -35,6 +35,7 @@ public enum BaseResponseCode {
     EXIST_PHONENUMBER(HttpStatus.BAD_REQUEST, false, 1005, "이미 등록된 전화번호입니다."),
     WRONG_VARIFYCODE(HttpStatus.BAD_REQUEST, false, 1006, "잘못된 인증번호입니다."),
     WRONG_TOKEN(HttpStatus.UNAUTHORIZED, false, 1007, "잘못된 RefreshToken"),
+    PASSWORD_CHANGE_WITHOUT_AUTH_ERROR(HttpStatus.UNAUTHORIZED, false, 1007, "이름 혹은 휴대폰 번호가 잘못되었습니다."),
     //
 
     //공통 에러. 9000 ~ 9999

@@ -2,8 +2,10 @@ package com.example.TMTBEMemberServer.adaptor.in.web.controller;
 
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.NicknameChangeRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PasswordChangeRequestVo;
+import com.example.TMTBEMemberServer.adaptor.in.web.vo.PasswordChangeWithoutAuthRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PayPasswordRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.PaypasswordChangeRequestVo;
+import com.example.TMTBEMemberServer.adaptor.in.web.vo.PaypasswordCheckRequestvo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.SignInRequestVo;
 import com.example.TMTBEMemberServer.adaptor.in.web.vo.SignUpRequestVo;
 import com.example.TMTBEMemberServer.application.port.in.usecase.DeleteAccountUsecase;
@@ -119,6 +121,15 @@ public class MemberController {
         return new BaseResponse<>();
     }
 
+    @PatchMapping("/reset/password")// 비밀번호 잊어먹어서 변경하는경우.
+    public BaseResponse<Void> passwordChangeWithoutAuth(
+            @RequestBody PasswordChangeWithoutAuthRequestVo requestVo){
+        log.info("비밀번호 찾기 실행");
+        passwordChangeUsecase.passwordChangeWithoutAuth(requestVo);
+
+        return new BaseResponse<>();
+    }
+
     @PostMapping("/signout")//로그아웃
     public BaseResponse<Void> signOut(@RequestHeader ("Authorization") String jwt){
         String uuid = decodingToken.getUuid(jwt);
@@ -134,12 +145,25 @@ public class MemberController {
 
     }
 
-
     @PostMapping("/reissue") //Access Token 재생성
     public BaseResponse<ReAccessTokenDto> tokenExpired(@RequestHeader ("Authorization") String jwt){
 
         ReAccessTokenDto reAccessToken = tokenUsecase.reissueToken(jwt);
         return new BaseResponse<>(reAccessToken);
+
+    }
+
+    @PostMapping("/pay-password/check")
+    public BaseResponse<Void> checkPayPassword(@RequestHeader ("Authorization") String jwt,
+            @RequestBody PaypasswordCheckRequestvo paypasswordCheckRequestvo){
+
+        String uuid = decodingToken.getUuid(jwt);
+
+        payPasswordUsecase.payPasswordCheck(modelMapper.map(paypasswordCheckRequestvo,
+                PayPasswordUsecase.payPasswordCheckRequestDto.class),uuid);
+
+
+        return new BaseResponse<>();
 
     }
   

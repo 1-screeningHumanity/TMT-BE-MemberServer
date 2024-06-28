@@ -20,7 +20,7 @@ public class RedisConfig {
     private final Environment environment;
 
     @Value("${spring.data.redis.port}")
-    private int port;
+    private int port;  //배포시int
 
     @Value("${spring.data.redis.host}")
     private String host;

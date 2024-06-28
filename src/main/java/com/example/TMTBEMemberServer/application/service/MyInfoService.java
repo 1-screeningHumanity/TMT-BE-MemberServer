@@ -4,7 +4,7 @@ package com.example.TMTBEMemberServer.application.service;
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.dto.GradeinfoResponseDto;
 import com.example.TMTBEMemberServer.application.port.in.usecase.MyInfoUsecase;
 import com.example.TMTBEMemberServer.application.port.out.dto.MyNicknameRequestDto;
-import com.example.TMTBEMemberServer.application.port.out.outport.LoadMyInfoport;
+import com.example.TMTBEMemberServer.application.port.out.outport.LoadInfoport;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class MyInfoService implements MyInfoUsecase {
 
 
-    private final LoadMyInfoport loadMyInfoport;
+    private final LoadInfoport loadMyInfoport;
 
 
     @Override

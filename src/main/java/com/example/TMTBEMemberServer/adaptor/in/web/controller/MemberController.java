@@ -162,6 +162,7 @@ public class MemberController {
                 PayPasswordUsecase.payPasswordCheckRequestDto.class),uuid);
 
 
+
         return new BaseResponse<>();
 
     }

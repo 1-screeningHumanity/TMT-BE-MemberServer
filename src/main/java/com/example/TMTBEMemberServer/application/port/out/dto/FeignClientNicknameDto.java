@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class FeignClientNIcknameDto {
+public class FeignClientNicknameDto {
 
-    private String uuid;
+    private String nickname;
 
 }

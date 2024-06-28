@@ -4,7 +4,7 @@ import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.dto.FeignCl
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.entity.MemberEntity;
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.MemberJpaRepository;
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.MemberQueryDslRepository;
-import com.example.TMTBEMemberServer.application.port.out.dto.FeignClientNIcknameDto;
+import com.example.TMTBEMemberServer.application.port.out.dto.FeignClientNicknameDto;
 import com.example.TMTBEMemberServer.application.port.out.outport.LoadInfoport;
 import com.example.TMTBEMemberServer.global.common.enumclass.Grade;
 import java.util.Optional;
@@ -34,18 +34,18 @@ public class InfoAdaptor implements LoadInfoport {
     }
 
     @Override
-    public FeignClientNicknameResponseVo getNicknameUuid(FeignClientNIcknameDto
+    public FeignClientNicknameResponseVo getNicknameUuid(FeignClientNicknameDto
             feignClientNIcknameDto){
 
         Optional<MemberEntity> memberEntity = memberJpaRepository
-                .findByUuid(feignClientNIcknameDto.getUuid());
+                .findByNickname(feignClientNIcknameDto.getNickname());
 
-        String nickname = memberEntity.get().getNickname();
+        String uuid = memberEntity.get().getUuid();
         FeignClientNicknameResponseVo feignClientNicknameResponseVo =
                 FeignClientNicknameResponseVo
                         .builder()
-                        .nickname(nickname)
-                        .uuid(feignClientNIcknameDto.getUuid())
+                        .nickname(feignClientNIcknameDto.getNickname())
+                        .uuid(uuid)
                         .build();
 
         return feignClientNicknameResponseVo;

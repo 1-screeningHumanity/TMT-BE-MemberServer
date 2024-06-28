@@ -2,7 +2,7 @@ package com.example.TMTBEMemberServer.application.service;
 
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.dto.FeignClientNicknameResponseVo;
 import com.example.TMTBEMemberServer.application.port.in.usecase.FeignClientUsecase;
-import com.example.TMTBEMemberServer.application.port.out.dto.FeignClientNIcknameDto;
+import com.example.TMTBEMemberServer.application.port.out.dto.FeignClientNicknameDto;
 import com.example.TMTBEMemberServer.application.port.out.outport.LoadInfoport;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,10 +20,10 @@ public class FeignClientService implements FeignClientUsecase {
     @Override
     public FeignClientNicknameResponseVo getNicknameUuid(UuidRequestDto uuidRequestDto) {
 
-        log.info("getuuid = {}", uuidRequestDto.getUuid());
+        log.info("getuuid = {}", uuidRequestDto.getNickname());
         FeignClientNicknameResponseVo nicknameUuid =
                 loadInfoport.getNicknameUuid(modelMapper.map(uuidRequestDto,
-               FeignClientNIcknameDto.class));
+               FeignClientNicknameDto.class));
 
         return nicknameUuid;
     }

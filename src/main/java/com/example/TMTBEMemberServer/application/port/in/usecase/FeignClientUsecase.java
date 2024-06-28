@@ -11,16 +11,14 @@ public interface FeignClientUsecase {
     FeignClientNicknameResponseVo getNicknameUuid(UuidRequestDto uuidRequestDto);
 
 
-
-
     @Getter
     @NoArgsConstructor
     class UuidRequestDto{
-        private String uuid;
+        private String nickname;
 
         @Builder
-        public UuidRequestDto(String uuid) {
-            this.uuid = uuid;
+        public UuidRequestDto(String nickname) {
+            this.nickname = nickname;
         }
 
     }

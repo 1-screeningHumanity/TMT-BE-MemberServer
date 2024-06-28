@@ -8,4 +8,6 @@ public interface MyInfoUsecase {
     MyNicknameRequestDto myNickname(String uuid);
 
     GradeinfoResponseDto myGrade(String uuid);
+
+
 }

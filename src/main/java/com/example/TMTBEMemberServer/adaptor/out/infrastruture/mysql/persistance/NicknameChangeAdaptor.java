@@ -6,6 +6,8 @@ import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.
 import com.example.TMTBEMemberServer.adaptor.out.infrastruture.mysql.repository.MemberQueryDslRepository;
 import com.example.TMTBEMemberServer.application.port.out.outport.SaveNicknameChangePort;
 import com.example.TMTBEMemberServer.domain.NicknameChange;
+import com.example.TMTBEMemberServer.global.common.exception.CustomException;
+import com.example.TMTBEMemberServer.global.common.response.BaseResponseCode;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -25,6 +27,14 @@ public class NicknameChangeAdaptor implements SaveNicknameChangePort {
         String uuid = nicknameChange.getUuid();
         Optional<MemberEntity> member = memberJpaRepository.findByUuid(uuid);
         String beforeNickname = member.get().getNickname();
+
+        boolean nicknamechange = memberJpaRepository.existsByNickname
+                (nicknameChange.getNickname());
+
+        if (nicknamechange) {
+          throw  new CustomException(BaseResponseCode.EXIST_NICKNAME);
+        }
+
 
         NicknameKafkaProducerDto nicknameKafkaProducerDto = NicknameKafkaProducerDto
                 .builder()

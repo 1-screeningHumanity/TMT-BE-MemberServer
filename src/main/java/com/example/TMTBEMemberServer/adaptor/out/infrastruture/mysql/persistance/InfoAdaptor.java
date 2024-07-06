@@ -46,6 +46,7 @@ public class InfoAdaptor implements LoadInfoport {
                         .builder()
                         .nickname(feignClientNIcknameDto.getNickname())
                         .uuid(uuid)
+                        .grade(String.valueOf(memberEntity.get().getGrade()))
                         .build();
 
         return feignClientNicknameResponseVo;

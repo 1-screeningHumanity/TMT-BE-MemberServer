@@ -49,7 +49,7 @@ public class PasswordChangeAdaptor implements SavePasswordPort {
                         .builder()
                         .memberId(findData.getMemberId())
                         .name(findData.getName())
-                        .password(hashPassword(findData.getPassword()))
+                        .password(hashPassword(input.getPassword()))
                         .nickname(findData.getNickname())
                         .payingPassword(findData.getPayingPassword())
                         .uuid(findData.getUuid())

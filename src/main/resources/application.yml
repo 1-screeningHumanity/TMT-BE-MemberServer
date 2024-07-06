@@ -28,7 +28,6 @@ spring:
     FROM: ${FROM_NUMBER}
 
 
-
 server:
   port: 0
 

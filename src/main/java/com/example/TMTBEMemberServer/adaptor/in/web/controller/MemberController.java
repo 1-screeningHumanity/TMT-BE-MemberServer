@@ -124,7 +124,6 @@ public class MemberController {
     @PatchMapping("/reset/password")// 비밀번호 잊어먹어서 변경하는경우.
     public BaseResponse<Void> passwordChangeWithoutAuth(
             @RequestBody PasswordChangeWithoutAuthRequestVo requestVo){
-        log.info("비밀번호 찾기 실행");
         passwordChangeUsecase.passwordChangeWithoutAuth(requestVo);
 
         return new BaseResponse<>();
@@ -161,6 +160,7 @@ public class MemberController {
 
         payPasswordUsecase.payPasswordCheck(modelMapper.map(paypasswordCheckRequestvo,
                 PayPasswordUsecase.payPasswordCheckRequestDto.class),uuid);
+
 
 
         return new BaseResponse<>();
